@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ template "fio_benchmark_exporter.fullname" . }}
+  labels:
+    app: {{ template "fio_benchmark_exporter.name" . }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "fio_benchmark_exporter.name" . }}
+  podMetricsEndpoints:
+  - port: metrics
+    path: /metrics
+    interval: 60s
